@@ -48,3 +48,4 @@ C:\Users\maazh\source\repos\PetShopManagement\PetShopManagement\obj\Debug\PetSho
 C:\Users\maazh\source\repos\PetShopManagement\PetShopManagement\obj\Debug\PetShopManagement.pdb
 C:\Users\maazh\source\repos\PetShopManagement\PetShopManagement\obj\Debug\PetShopManagement.Customers.resources
 C:\Users\maazh\source\repos\PetShopManagement\PetShopManagement\obj\Debug\PetShopManagement.Products.resources
+C:\Users\maazh\source\repos\PetShopManagement\PetShopManagement\obj\Debug\PetShopManagement.Billings.resources

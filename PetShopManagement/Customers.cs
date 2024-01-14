@@ -10,15 +10,32 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Input;
+using static PetShopManagement.Login;
 
 namespace PetShopManagement
 {
     public partial class Customers : Form
     {
+        private User loggedInUser;
         public Customers()
         {
             InitializeComponent();
             DisplayCustomers();
+            loggedInUser = UserManager.LoggedInUser;
+            if (loggedInUser != null)
+            {
+                // You can use the user details as needed
+                int userId = loggedInUser.UserId;
+                string username = loggedInUser.Username;
+
+                // Example: Display the username in a label
+                label7.Text = username;
+            }
+            else
+            {
+                // User is not logged in
+                // Handle the case where no user is logged in
+            }
         }
         SqlConnection conn = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\maazh\OneDrive\Documents\PetShopDb.mdf;Integrated Security=True;Connect Timeout=30");
         int key = 0;
@@ -163,6 +180,30 @@ namespace PetShopManagement
         {
             Products obj = new Products();
             obj.Show();
+            this.Hide();
+        }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+            Billings obj = new Billings();
+            obj.Show();
+            this.Hide();
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+            Home obj = new Home();
+            obj.Show();
+            this.Hide();
+        }
+
+        private void label6_Click(object sender, EventArgs e)
+        {
+            UserManager.Logout();
+
+            // Navigate to the login form or perform any other necessary actions
+            Login loginForm = new Login();
+            loginForm.Show();
             this.Hide();
         }
     }
