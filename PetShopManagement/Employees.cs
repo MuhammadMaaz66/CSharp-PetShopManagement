@@ -58,15 +58,9 @@ namespace PetShopManagement
                 try
                 {
                     conn.Open();
-                    // Convert the string to DateTime
-                    Console.WriteLine("Date string to parse: " + EmpDOB.Text.Trim());
-                    DateTime empDOB = DateTime.ParseExact(EmpDOB.Text.Trim(), "dddd, MMMM dd, yyyy", CultureInfo.InvariantCulture);
-                    Console.WriteLine("Date string: " + empDOB);
-                    // EmpDOB @ED, ==> insert these both in line below...
                     SqlCommand cmd = new SqlCommand("Update EmployeeTable set EmpName=@EN, EmpAdd=@EA, EmpPhone=@EP, EmpPass=@EPa where EmpNum=@EKey", conn);
                     cmd.Parameters.AddWithValue("@EN", EmpNameTb.Text);
                     cmd.Parameters.AddWithValue("@EA", EmpAddTb.Text);
-                    //cmd.Parameters.AddWithValue("@ED", EmpDOB.Text);
                     cmd.Parameters.AddWithValue("@EP", EmpPhoneTb.Text);
                     cmd.Parameters.AddWithValue("@EPa", EmpPassTb.Text);
                     cmd.Parameters.AddWithValue("@EKey", key);
@@ -123,15 +117,9 @@ namespace PetShopManagement
                 try 
                 {
                     conn.Open();
-                    // Convert the string to DateTime
-                    Console.WriteLine("Date string to parse: " + EmpDOB.Text.Trim());
-                    DateTime empDOB = DateTime.ParseExact(EmpDOB.Text.Trim(), "dddd, MMMM dd, yyyy", CultureInfo.InvariantCulture);
-                    Console.WriteLine("Date string: " + empDOB);
-                    // EmpDOB @ED, ==> insert these both in line below...
                     SqlCommand cmd = new SqlCommand("insert into EmployeeTable (EmpName, EmpAdd, EmpPhone, EmpPass ) values(@EN, @EA, @EP, @EPa)", conn);
                     cmd.Parameters.AddWithValue("@EN", EmpNameTb.Text);
                     cmd.Parameters.AddWithValue("@EA", EmpAddTb.Text);
-                    //cmd.Parameters.AddWithValue("@ED", EmpDOB.Text);
                     cmd.Parameters.AddWithValue("@EP", EmpPhoneTb.Text);
                     cmd.Parameters.AddWithValue("@EPa", EmpPassTb.Text);
                     cmd.ExecuteNonQuery();
@@ -169,11 +157,6 @@ namespace PetShopManagement
                 try
                 {
                     conn.Open();
-                    // Convert the string to DateTime
-                    Console.WriteLine("Date string to parse: " + EmpDOB.Text.Trim());
-                    DateTime empDOB = DateTime.ParseExact(EmpDOB.Text.Trim(), "dddd, MMMM dd, yyyy", CultureInfo.InvariantCulture);
-                    Console.WriteLine("Date string: " + empDOB);
-                    // EmpDOB @ED, ==> insert these both in line below...
                     SqlCommand cmd = new SqlCommand("delete from EmployeeTable where EmpNum = @EmpKey", conn);
                     cmd.Parameters.AddWithValue("@EmpKey", key);
                     cmd.ExecuteNonQuery();

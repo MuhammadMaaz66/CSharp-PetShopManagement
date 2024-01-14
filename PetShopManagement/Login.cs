@@ -97,19 +97,26 @@ namespace PetShopManagement
         {
             string username = userNameTb.Text;
             string password = passwordTb.Text;
-            if (AuthenticateUser(username, password))
+            if (userNameTb.Text == "" || passwordTb.Text == "")
             {
-                MessageBox.Show("Login successful!");
-                // Open your main application form or perform any other necessary actions
-                // Example: MainApplicationForm mainForm = new MainApplicationForm();
-                // mainForm.Show();
-                Home obj = new Home();
-                obj.Show();
-                this.Hide();
+                MessageBox.Show("Missing Information!");
             }
             else
             {
-                MessageBox.Show("Invalid username or password. Please try again.");
+                if (AuthenticateUser(username, password))
+                {
+                    MessageBox.Show("Login successful!");
+                    // Open your main application form or perform any other necessary actions
+                    // Example: MainApplicationForm mainForm = new MainApplicationForm();
+                    // mainForm.Show();
+                    Home obj = new Home();
+                    obj.Show();
+                    this.Hide();
+                }
+                else
+                {
+                    MessageBox.Show("Invalid username or password. Please try again.");
+                }
             }
         }
 

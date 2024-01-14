@@ -33,9 +33,10 @@
             this.bunifuElipse1 = new Bunifu.Framework.UI.BunifuElipse(this.components);
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.guna2ProgressBar1 = new Guna.UI2.WinForms.Guna2ProgressBar();
-            this.label2 = new System.Windows.Forms.Label();
+            this.ProgressBar = new Guna.UI2.WinForms.Guna2ProgressBar();
+            this.PercentageLabel = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -65,27 +66,29 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "Pet Shop Management System";
             // 
-            // guna2ProgressBar1
+            // ProgressBar
             // 
-            this.guna2ProgressBar1.BorderRadius = 7;
-            this.guna2ProgressBar1.Location = new System.Drawing.Point(128, 260);
-            this.guna2ProgressBar1.Name = "guna2ProgressBar1";
-            this.guna2ProgressBar1.Size = new System.Drawing.Size(377, 18);
-            this.guna2ProgressBar1.TabIndex = 2;
-            this.guna2ProgressBar1.Text = "guna2ProgressBar1";
-            this.guna2ProgressBar1.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault;
+            this.ProgressBar.BorderRadius = 7;
+            this.ProgressBar.Location = new System.Drawing.Point(128, 260);
+            this.ProgressBar.Name = "ProgressBar";
+            this.ProgressBar.ProgressColor = System.Drawing.Color.Navy;
+            this.ProgressBar.ProgressColor2 = System.Drawing.Color.Navy;
+            this.ProgressBar.Size = new System.Drawing.Size(377, 18);
+            this.ProgressBar.TabIndex = 2;
+            this.ProgressBar.Text = "guna2ProgressBar1";
+            this.ProgressBar.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault;
             // 
-            // label2
+            // PercentageLabel
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Cambria", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.MidnightBlue;
-            this.label2.Location = new System.Drawing.Point(254, 133);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(56, 27);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "%%";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
+            this.PercentageLabel.AutoSize = true;
+            this.PercentageLabel.Font = new System.Drawing.Font("Cambria", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.PercentageLabel.ForeColor = System.Drawing.Color.MidnightBlue;
+            this.PercentageLabel.Location = new System.Drawing.Point(254, 133);
+            this.PercentageLabel.Name = "PercentageLabel";
+            this.PercentageLabel.Size = new System.Drawing.Size(56, 27);
+            this.PercentageLabel.TabIndex = 3;
+            this.PercentageLabel.Text = "%%";
+            this.PercentageLabel.Click += new System.EventHandler(this.label2_Click);
             // 
             // label3
             // 
@@ -98,6 +101,10 @@
             this.label3.TabIndex = 4;
             this.label3.Text = "Loading Modules";
             // 
+            // timer1
+            // 
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
             // Splash
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 23F);
@@ -105,8 +112,8 @@
             this.BackColor = System.Drawing.Color.Crimson;
             this.ClientSize = new System.Drawing.Size(575, 305);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.guna2ProgressBar1);
+            this.Controls.Add(this.PercentageLabel);
+            this.Controls.Add(this.ProgressBar);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pictureBox1);
             this.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -127,8 +134,9 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label2;
-        private Guna.UI2.WinForms.Guna2ProgressBar guna2ProgressBar1;
+        private System.Windows.Forms.Label PercentageLabel;
+        private Guna.UI2.WinForms.Guna2ProgressBar ProgressBar;
+        private System.Windows.Forms.Timer timer1;
     }
 }
 

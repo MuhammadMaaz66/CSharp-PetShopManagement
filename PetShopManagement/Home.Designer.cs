@@ -33,7 +33,7 @@
             this.bunifuElipse1 = new Bunifu.Framework.UI.BunifuElipse(this.components);
             this.panel1 = new System.Windows.Forms.Panel();
             this.guna2CircleProgressBar1 = new Guna.UI2.WinForms.Guna2CircleProgressBar();
-            this.label14 = new System.Windows.Forms.Label();
+            this.FinanceLabel = new System.Windows.Forms.Label();
             this.panel6 = new System.Windows.Forms.Panel();
             this.label13 = new System.Windows.Forms.Label();
             this.pictureBox11 = new System.Windows.Forms.PictureBox();
@@ -65,6 +65,9 @@
             this.pictureBox6 = new System.Windows.Forms.PictureBox();
             this.label7 = new System.Windows.Forms.Label();
             this.pictureBox7 = new System.Windows.Forms.PictureBox();
+            this.DogsLabel = new System.Windows.Forms.Label();
+            this.CatsLabel = new System.Windows.Forms.Label();
+            this.BirdsLabel = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.guna2CircleProgressBar1.SuspendLayout();
             this.panel6.SuspendLayout();
@@ -107,32 +110,36 @@
             // 
             // guna2CircleProgressBar1
             // 
-            this.guna2CircleProgressBar1.Controls.Add(this.label14);
+            this.guna2CircleProgressBar1.Controls.Add(this.FinanceLabel);
             this.guna2CircleProgressBar1.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(213)))), ((int)(((byte)(218)))), ((int)(((byte)(223)))));
             this.guna2CircleProgressBar1.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.guna2CircleProgressBar1.ForeColor = System.Drawing.Color.White;
             this.guna2CircleProgressBar1.Location = new System.Drawing.Point(707, 454);
             this.guna2CircleProgressBar1.Minimum = 0;
             this.guna2CircleProgressBar1.Name = "guna2CircleProgressBar1";
+            this.guna2CircleProgressBar1.ProgressColor = System.Drawing.Color.Gold;
+            this.guna2CircleProgressBar1.ProgressColor2 = System.Drawing.Color.Gold;
             this.guna2CircleProgressBar1.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
             this.guna2CircleProgressBar1.Size = new System.Drawing.Size(213, 213);
             this.guna2CircleProgressBar1.TabIndex = 9;
             this.guna2CircleProgressBar1.Text = "guna2CircleProgressBar1";
+            this.guna2CircleProgressBar1.Value = 100;
             // 
-            // label14
+            // FinanceLabel
             // 
-            this.label14.AutoSize = true;
-            this.label14.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.ForeColor = System.Drawing.Color.IndianRed;
-            this.label14.Location = new System.Drawing.Point(85, 98);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(48, 23);
-            this.label14.TabIndex = 6;
-            this.label14.Text = "Cats";
+            this.FinanceLabel.AutoSize = true;
+            this.FinanceLabel.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FinanceLabel.ForeColor = System.Drawing.Color.IndianRed;
+            this.FinanceLabel.Location = new System.Drawing.Point(48, 95);
+            this.FinanceLabel.Name = "FinanceLabel";
+            this.FinanceLabel.Size = new System.Drawing.Size(32, 23);
+            this.FinanceLabel.TabIndex = 6;
+            this.FinanceLabel.Text = "Rs";
             // 
             // panel6
             // 
             this.panel6.BackColor = System.Drawing.Color.Crimson;
+            this.panel6.Controls.Add(this.BirdsLabel);
             this.panel6.Controls.Add(this.label13);
             this.panel6.Controls.Add(this.pictureBox11);
             this.panel6.Location = new System.Drawing.Point(624, 281);
@@ -164,6 +171,7 @@
             // panel5
             // 
             this.panel5.BackColor = System.Drawing.Color.Crimson;
+            this.panel5.Controls.Add(this.CatsLabel);
             this.panel5.Controls.Add(this.label12);
             this.panel5.Controls.Add(this.pictureBox10);
             this.panel5.Location = new System.Drawing.Point(54, 454);
@@ -195,6 +203,7 @@
             // panel4
             // 
             this.panel4.BackColor = System.Drawing.Color.Crimson;
+            this.panel4.Controls.Add(this.DogsLabel);
             this.panel4.Controls.Add(this.label11);
             this.panel4.Controls.Add(this.pictureBox9);
             this.panel4.Location = new System.Drawing.Point(54, 283);
@@ -450,6 +459,39 @@
             this.pictureBox7.TabIndex = 16;
             this.pictureBox7.TabStop = false;
             // 
+            // DogsLabel
+            // 
+            this.DogsLabel.AutoSize = true;
+            this.DogsLabel.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DogsLabel.ForeColor = System.Drawing.Color.Navy;
+            this.DogsLabel.Location = new System.Drawing.Point(100, 58);
+            this.DogsLabel.Name = "DogsLabel";
+            this.DogsLabel.Size = new System.Drawing.Size(54, 23);
+            this.DogsLabel.TabIndex = 6;
+            this.DogsLabel.Text = "Dogs";
+            // 
+            // CatsLabel
+            // 
+            this.CatsLabel.AutoSize = true;
+            this.CatsLabel.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CatsLabel.ForeColor = System.Drawing.Color.Navy;
+            this.CatsLabel.Location = new System.Drawing.Point(110, 64);
+            this.CatsLabel.Name = "CatsLabel";
+            this.CatsLabel.Size = new System.Drawing.Size(48, 23);
+            this.CatsLabel.TabIndex = 7;
+            this.CatsLabel.Text = "Cats";
+            // 
+            // BirdsLabel
+            // 
+            this.BirdsLabel.AutoSize = true;
+            this.BirdsLabel.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BirdsLabel.ForeColor = System.Drawing.Color.Navy;
+            this.BirdsLabel.Location = new System.Drawing.Point(97, 60);
+            this.BirdsLabel.Name = "BirdsLabel";
+            this.BirdsLabel.Size = new System.Drawing.Size(59, 23);
+            this.BirdsLabel.TabIndex = 8;
+            this.BirdsLabel.Text = "Birds";
+            // 
             // Home
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -538,9 +580,12 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.PictureBox pictureBox9;
         private Guna.UI2.WinForms.Guna2CircleProgressBar guna2CircleProgressBar1;
-        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label FinanceLabel;
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.PictureBox pictureBox11;
+        private System.Windows.Forms.Label BirdsLabel;
+        private System.Windows.Forms.Label CatsLabel;
+        private System.Windows.Forms.Label DogsLabel;
     }
 }

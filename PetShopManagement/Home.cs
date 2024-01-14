@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -13,10 +14,15 @@ namespace PetShopManagement
 {
     public partial class Home : Form
     {
+        SqlConnection conn = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\maazh\OneDrive\Documents\PetShopDb.mdf;Integrated Security=True;Connect Timeout=30");
         private User loggedInUser;
         public Home()
         {
             InitializeComponent();
+            CountDogs();
+            CountCats();
+            CountBirds();
+            Finance();
             loggedInUser = UserManager.LoggedInUser;
             if (loggedInUser != null)
             {
@@ -45,7 +51,45 @@ namespace PetShopManagement
             obj.Show();
             this.Hide();
         }
-
+        private void CountDogs()
+        {
+            conn.Open();
+            string category = "Dog";
+            SqlDataAdapter sda = new SqlDataAdapter("Select Count(*) from ProductTable where ProdCat='" + category + "'", conn);
+            DataTable dt = new DataTable();
+            sda.Fill(dt);
+            DogsLabel.Text = dt.Rows[0][0].ToString();
+            conn.Close();
+        }
+        private void CountCats()
+        {
+            conn.Open();
+            string category = "Cat";
+            SqlDataAdapter sda = new SqlDataAdapter("Select Count(*) from ProductTable where ProdCat='" + category + "'", conn);
+            DataTable dt = new DataTable();
+            sda.Fill(dt);
+            CatsLabel.Text = dt.Rows[0][0].ToString();
+            conn.Close();
+        }
+        private void CountBirds()
+        {
+            conn.Open();
+            string category = "Bird";
+            SqlDataAdapter sda = new SqlDataAdapter("Select Count(*) from ProductTable where ProdCat='" + category + "'", conn);
+            DataTable dt = new DataTable();
+            sda.Fill(dt);
+            BirdsLabel.Text = dt.Rows[0][0].ToString();
+            conn.Close();
+        }
+        private void Finance()
+        {
+            conn.Open();
+            SqlDataAdapter sda = new SqlDataAdapter("Select Sum(Price) from BillTable", conn);
+            DataTable dt = new DataTable();
+            sda.Fill(dt);
+            FinanceLabel.Text = "Rs. "+dt.Rows[0][0].ToString();
+            conn.Close();
+        }
         private void pictureBox2_Click(object sender, EventArgs e)
         {
 

@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.Windows.Input;
 using static PetShopManagement.Login;
+using System.Globalization;
 
 namespace PetShopManagement
 {
@@ -19,25 +20,24 @@ namespace PetShopManagement
         public Billings()
         {
             InitializeComponent();
-            //EmpNameLabel.Text = Login.Employee;
             GetCustomers();
             DisplayProduct();
+            displayTransactions();
             //GetBillData(); // uncomment when want to show on the startup
             loggedInUser = UserManager.LoggedInUser;
             if (loggedInUser != null)
             {
-                // You can use the user details as needed
                 int userId = loggedInUser.UserId;
                 string username = loggedInUser.Username;
 
-                // Example: Display the username in a label
+                // Showing logged in username
                 label7.Text = username;
             }
             else
             {
-                // User is not logged in
-                // Handle the case where no user is logged in
+                MessageBox.Show("Error getting user details!");
             }
+            CategoryCB.SelectedIndexChanged += CategoryCB_SelectedIndexChanged;
         }
         int Key = 0, Stock = 0;
         SqlConnection conn = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\maazh\OneDrive\Documents\PetShopDb.mdf;Integrated Security=True;Connect Timeout=30");
@@ -60,6 +60,30 @@ namespace PetShopManagement
             CategoryCB.DataSource = dt;
             conn.Close();
         }
+        private void GetCustomerName()
+        {
+            if (conn.State == ConnectionState.Closed)
+            {
+                conn.Open();
+            }
+
+            string Query = "Select CustName from CustomerTable where CustId=" + CategoryCB.SelectedValue.ToString();
+            SqlCommand cmd = new SqlCommand(Query, conn);
+            object result = cmd.ExecuteScalar();
+
+            if (result != null)
+            {
+                CustomerNameTb.Text = result.ToString();
+            }
+            else
+            {
+                // Handle the case where no customer name is found
+                CustomerNameTb.Text = "Customer Not Found";
+            }
+
+            conn.Close();
+        }
+
         private void DisplayProduct()
         {
             conn.Open();
@@ -160,6 +184,24 @@ namespace PetShopManagement
         {
             Reset();
         }
+        private void displayTransactions()
+        {
+            try
+            {
+                conn.Open();
+                string Query = "Select * from BillTable";
+                SqlDataAdapter sda = new SqlDataAdapter(Query, conn);
+                SqlCommandBuilder Builder = new SqlCommandBuilder(sda);
+                var ds = new DataSet();
+                sda.Fill(ds);
+                TransactionsDGV.DataSource = ds.Tables[0];
+                conn.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
         string prodName;
         private void PrintButton_Click(object sender, EventArgs e)
         {
@@ -171,11 +213,16 @@ namespace PetShopManagement
         }
         int prodId, prodQty, prodPrice, total, pos = 60;
 
+        private void CategoryCB_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            GetCustomerName();
+        }
+
         private void label6_Click(object sender, EventArgs e)
         {
             UserManager.Logout();
 
-            // Navigate to the login form or perform any other necessary actions
+            // Navigate to the login form
             Login loginForm = new Login();
             loginForm.Show();
             this.Hide();
@@ -197,20 +244,20 @@ namespace PetShopManagement
             foreach (DataGridViewRow row in BillDGV.Rows)
             {
                 prodId = Convert.ToInt32(row.Cells["BNum"].Value);
-                    prodName = "" + row.Cells["ProdName"].Value;
-                    prodPrice = Convert.ToInt32(row.Cells["Price"].Value);
-                    prodQty = Convert.ToInt32(row.Cells["Quantity"].Value);
-                    total = Convert.ToInt32(row.Cells["Total"].Value);
-                    e.Graphics.DrawString("" + prodId.ToString(), new Font("Cambria", 8, FontStyle.Bold), Brushes.Blue, new Point(26, pos));
-                    e.Graphics.DrawString("" + prodName, new Font("Cambria", 8, FontStyle.Bold), Brushes.Blue, new Point(60, pos));
-                    e.Graphics.DrawString("" + prodPrice.ToString(), new Font("Cambria", 8, FontStyle.Bold), Brushes.Blue, new Point(180, pos));
-                    e.Graphics.DrawString("" + prodQty.ToString(), new Font("Cambria", 8, FontStyle.Bold), Brushes.Blue, new Point(250, pos));
-                    e.Graphics.DrawString("" + total.ToString(), new Font("Cambria", 8, FontStyle.Bold), Brushes.Blue, new Point(300, pos));
-                    pos = pos + 20;
-                    rowsToRemove.Add(row);
-                }
-                e.Graphics.DrawString("Grand Total: Rs" + GrandTotal, new Font("Cambria", 12, FontStyle.Bold), Brushes.Crimson, new Point(50, pos + 50));
-                e.Graphics.DrawString("***************** PetShop *****************", new Font("Cambria", 12, FontStyle.Bold), Brushes.Crimson, new Point(10, pos + 85));
+                prodName = "" + row.Cells["ProdName"].Value;
+                prodPrice = Convert.ToInt32(row.Cells["Price"].Value);
+                prodQty = Convert.ToInt32(row.Cells["Quantity"].Value);
+                total = Convert.ToInt32(row.Cells["Total"].Value);
+                e.Graphics.DrawString("" + prodId.ToString(), new Font("Cambria", 8, FontStyle.Bold), Brushes.Blue, new Point(26, pos));
+                e.Graphics.DrawString("" + prodName, new Font("Cambria", 8, FontStyle.Bold), Brushes.Blue, new Point(60, pos));
+                e.Graphics.DrawString("" + prodPrice.ToString(), new Font("Cambria", 8, FontStyle.Bold), Brushes.Blue, new Point(180, pos));
+                e.Graphics.DrawString("" + prodQty.ToString(), new Font("Cambria", 8, FontStyle.Bold), Brushes.Blue, new Point(250, pos));
+                e.Graphics.DrawString("" + total.ToString(), new Font("Cambria", 8, FontStyle.Bold), Brushes.Blue, new Point(300, pos));
+                pos = pos + 20;
+                rowsToRemove.Add(row);
+            }
+            e.Graphics.DrawString("Grand Total: Rs" + GrandTotal, new Font("Cambria", 12, FontStyle.Bold), Brushes.Crimson, new Point(50, pos + 50));
+            e.Graphics.DrawString("***************** PetShop *****************", new Font("Cambria", 12, FontStyle.Bold), Brushes.Crimson, new Point(10, pos + 85));
             foreach (DataGridViewRow rowToRemove in rowsToRemove)
             {
                 if (!rowToRemove.IsNewRow)
@@ -218,8 +265,8 @@ namespace PetShopManagement
                     BillDGV.Rows.Remove(rowToRemove);
                 }
             }
-            //BillDGV.Rows.Clear();
             BillDGV.Refresh();
+            displayTransactions();
             pos = 100;
             GrandTotal = 0;
             n = 0;
@@ -263,14 +310,7 @@ namespace PetShopManagement
                 dataTable.Columns.Add("Total", typeof(decimal));   // Total
 
                 int total = Convert.ToInt32(QuantityTb.Text)*Convert.ToInt32(PriceTb.Text);
-                //DataGridViewRow newRow = new DataGridViewRow();
                 DataRow newRow = dataTable.NewRow();
-                //newRow.CreateCells(ProductsDGV);
-                //newRow.Cells[0].Value = n+1;
-                //newRow.Cells[1].Value = ProdNameTb.Text;
-                //newRow.Cells[2].Value = QuantityTb.Text;
-                //newRow.Cells[3].Value = PriceTb.Text;
-                //newRow.Cells[4].Value = total;
                 newRow["ID"] = n + 1;                          // Assuming n is the product ID
                 newRow["ProductName"] = ProdNameTb.Text;       // Product name from TextBox
                 newRow["Quantity"] = Convert.ToInt32(QuantityTb.Text); // Quantity from TextBox
@@ -283,15 +323,12 @@ namespace PetShopManagement
                 /// code to store bill to database
                 conn.Open();
                 SqlCommand cmd = new SqlCommand("insert into BillTable (ProdName, Quantity, Price, Total) values(@PN, @BQ, @BP, @BT)", conn);
-                //cmd.Parameters.AddWithValue("@BN", n + 1);
                 cmd.Parameters.AddWithValue("@PN", ProdNameTb.Text);
                 cmd.Parameters.AddWithValue("@BQ", Convert.ToInt32(QuantityTb.Text));
                 cmd.Parameters.AddWithValue("@BP", Convert.ToDecimal(PriceTb.Text));
                 cmd.Parameters.AddWithValue("@BT", total);
                 cmd.ExecuteNonQuery();
-                //MessageBox.Show("Bill Added!");
                 conn.Close();
-                //ProductsDGV.Rows.Add(newRow);
                 n++;
                 TotalLabel.Text = GrandTotal.ToString();
                 GetBillData();
